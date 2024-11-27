@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -64,12 +65,14 @@ public class Venda implements Serializable{
         listaItens.remove(item);
     }
     
-    public float calcularTotal(){
-        float soma = 0;
-        for (Item i : listaItens){
-            soma += i.getProduto().getPreco() * i.getQuantidade();
-        }
-        return soma;
+    public BigDecimal calcularTotal() {
+    BigDecimal soma = BigDecimal.ZERO; // Inicializa a soma como 0 em BigDecimal
+    for (Item i : listaItens) {
+        // Multiplica o preço pela quantidade
+        BigDecimal subtotal = i.getProduto().getPreco().multiply(BigDecimal.valueOf(i.getQuantidade()));
+        soma = soma.add(subtotal); // Adiciona o subtotal ao total
     }
+    return soma; // Retorna o total como BigDecimal
+}
     
 }

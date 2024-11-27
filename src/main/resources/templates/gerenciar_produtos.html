@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
     <head> 
         <meta charset="utf-8"/>
-        <title>Sistema Gerenciador de Vendas (SGV)</title>
+        <title>Gerenciador de Vendas e Estoque (SGVE))</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
@@ -12,6 +12,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"></script>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
     </head>
     <body>
         <div th:replace="header :: header">...</div>
@@ -26,6 +27,7 @@
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Preço</th>
+                        <th>Quantidade Estoque</th> <!-- Nova coluna -->
                         <th>Alterar</th>
                         <th>Excluir</th>
                     </tr>
@@ -35,6 +37,7 @@
                         <td th:text="${p.id}"></td>
                         <td th:text="${p.nome}"></td>
                         <td th:text="${p.preco}"></td>
+                        <td th:text="${p.quantidadeEstoque}"></td> <!-- Adicionando a quantidade em estoque -->
                         <td><a th:href="@{/produtos/{id}(id=${p.id})}" class="btn btn-warning"><i class="bi bi-pencil"></i></a></td>
                         <td>
                             <form action="#" th:action="@{/produtos/{id}(id=${p.id})}" th:method="delete">

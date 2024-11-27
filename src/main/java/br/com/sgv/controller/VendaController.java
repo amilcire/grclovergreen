@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -66,18 +67,33 @@ public class VendaController {
         vendaRepository.save(this.venda);
         return "redirect:/vendas";
     }
-    
+
+    @Transactional
     @PostMapping("/vendas/itens")
     public String adicionarItem(@Valid Item item, Model model, BindingResult result) {
         if (result.hasErrors()) {
             return "editar_venda";
         }
-        if (item.getProduto() != null){
-            venda.adicionarItem(item);
-            item.setVenda(venda);
-            vendaRepository.save(venda);
+        if (item.getProduto() != null) {
+            // Verifica se a quantidade disponível no estoque é suficiente para a venda
+            if (item.getProduto().getQuantidadeEstoque() >= item.getQuantidade()) {
+                // Atualiza o estoque do produto
+                item.getProduto().setQuantidadeEstoque(item.getProduto().getQuantidadeEstoque() - item.getQuantidade());
+                // Salva o produto com o estoque atualizado
+                produtoRepository.save(item.getProduto());
+
+                // Adiciona o item à venda
+                venda.adicionarItem(item);
+                item.setVenda(venda);
+
+                // Salva a venda
+                vendaRepository.save(venda);
+            } else {
+                model.addAttribute("error", "Estoque insuficiente para o produto " + item.getProduto().getNome());
+                return "editar_venda"; // Retorna se não houver estoque suficiente
+            }
         }
-        String url = "redirect:/vendas/"+venda.getId();
+        String url = "redirect:/vendas/" + venda.getId();
         return url;
     }
 
@@ -85,22 +101,22 @@ public class VendaController {
     public String removerItem(@PathVariable("id") long id) {
         Item aux = null;
         Iterator<Item> iterator = venda.getListaItens().iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             Item i = iterator.next();
-            if (i.getId() == id){
+            if (i.getId() == id) {
                 aux = i;
                 break;
             }
         }
-        if (aux != null){
+        if (aux != null) {
             venda.removerItem(aux);
             aux.setVenda(null);
             vendaRepository.save(venda);
         }
-        String url = "redirect:/vendas/"+venda.getId();
+        String url = "redirect:/vendas/" + venda.getId();
         return url;
     }
-    
+
     @DeleteMapping("/vendas/{id}")
     public String excluir(@PathVariable("id") long id) {
         vendaRepository.deleteById(id);

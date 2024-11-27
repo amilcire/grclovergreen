@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import java.math.BigDecimal;  // Adicione esta linha
 
 /**
  *
@@ -24,10 +25,26 @@ public class Produto{
     private long id;
     @Size(min = 1, message = "O nome do produto precisa ser válido.")
     private String nome;
-    private float preco;
-
+    private BigDecimal preco;
+    private Integer quantidadeEstoque;
+     
+    
     @Override
     public String toString() {
-        return nome;
+        return nome;    
     }
+ public static void main(String[] args) {
+        Produto produto = new Produto();
+
+        // Define o nome do produto
+        produto.setNome("Exemplo Produto");
+
+        // Define o preço diretamente como BigDecimal
+        produto.setPreco(new BigDecimal("199.99"));
+
+        // Exibe o produto completo
+        System.out.println(produto);
+    }
+    
 }
+
