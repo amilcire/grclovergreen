@@ -5,8 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  *
- * @author Pablo Rangel <pablo.rangel@gmail.com>
- * @date 13/05/2021
+ * 
  * @brief  class LoginController
  */
 @Controller

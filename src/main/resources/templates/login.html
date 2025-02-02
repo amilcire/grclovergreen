@@ -15,12 +15,18 @@
                 body{
     background:lightskyblue;
 }
+h2{
+    max-width: 400px;
+margin:4px;
+font-size: 14px;
+}
+
             </style>                      
     </head>
     <body>
         <form th:action="@{/efetuarLogin}"  method="post">
             <div class="container" style="margin-top: 50px; width: 60%;">
-                <h1 class="alert alert-dark" id="titulo"> Gerenciador Clovergreen</h1>
+                <h1 class="alert text-dark" id="titulo"> Gerenciador Clovergreen</h1>
                 <h2 class="alert alert-warning"> Por favor, insira o login e senha.</h2>
                 <div class="row">
                     <div class="col-md-12 mb-3">
