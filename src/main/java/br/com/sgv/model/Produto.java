@@ -18,7 +18,7 @@ import java.math.BigDecimal;  // Adicione esta linha
 @Entity
 @Getter
 @Setter
-public class Produto{
+    public class Produto{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

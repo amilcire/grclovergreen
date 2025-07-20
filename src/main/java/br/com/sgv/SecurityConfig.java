@@ -17,8 +17,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  *
- * @author Pablo Rangel <pablo.rangel@gmail.com>
- * @date 13/05/2021
+ * 
  * @brief class SecurityConfig
  */
 @Configuration

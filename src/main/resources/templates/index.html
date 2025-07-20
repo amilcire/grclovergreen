@@ -9,11 +9,16 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    </head>
+            
+        </head>
     <body>
         <div th:replace="header :: header">...</div>
-          
-        <h1 style="margin-top: 60px;margin-left:350px;"> Bem vindo(a)!</h1> 
+       
+      <h2 style="text-align:center; margin-top: 150px;">
+  👋 <strong>Seja bem-vindo(a), <span th:text="${usuarioNome}">Usuário</span>! Vamos fazer hoje ser incrível!</strong>
+</h2>
+
+
     </body>
 
 </html>

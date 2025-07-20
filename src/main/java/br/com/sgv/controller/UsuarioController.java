@@ -3,6 +3,7 @@ package br.com.sgv.controller;
 import br.com.sgv.model.Usuario;
 import br.com.sgv.repository.UsuarioRepository;
 import jakarta.validation.Valid;
+import java.security.Principal;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,4 +58,5 @@ public class UsuarioController {
         usuarioRepository.deleteById(id);
         return "redirect:/usuarios";
     }
+    
 }

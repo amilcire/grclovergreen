@@ -1,4 +1,7 @@
 body{
-    background:lightskyblue;
+    background:cadetblue;
 
+}
+padding {
+    background-color: currentColor
 }
